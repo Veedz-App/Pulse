@@ -53,12 +53,18 @@ private struct _ConsoleMessageCell: View {
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             Button(action: { shareItems = ShareService.share(message, as: .html) }) {
-                Label("Share", systemImage: "square.and.arrow.up.fill")
+//                Label("Share", systemImage: "square.and.arrow.up.fill")
+                Label {
+                    Text("Share")
+                } icon: {
+                    Image(systemName: "square.and.arrow.up.fill")
+                }
             }.tint(.blue)
         }
         .contextMenu {
             ContextMenu.MessageContextMenu(message: message, shareItems: $shareItems)
         }
+        .foregroundColor(.white)
 #if os(iOS)
         .sheet(item: $shareItems, content: ShareView.init)
 #else
